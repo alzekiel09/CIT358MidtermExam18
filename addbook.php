@@ -76,8 +76,26 @@ if(ISSET($_POST['editrecord'])){
             </thead>
             <tbody>
                 <?php
-                
-                ?>
+				$conn = new mysqli("localhost", "root", "", "library") or die(mysqli_error());
+				$query = $conn->query("SELECT * FROM `registration` ORDER BY `book_id` DESC") or die(mysqli_error());
+				while($fetch = $query->fetch_array()){
+				?>
+				<tr>
+					<td><center><?php echo $fetch['book_id']?></center></td>
+					<td><center><?php echo $fetch['title']?></center></td>
+					<td><center><?php echo $fetch['pages']?></center></td>
+					<td><center><?php echo $fetch['author']?></center></td>
+					<td><center><?php echo $fetch['year']?></center></td>
+					<td><center>
+						<button href="#update.php<?php echo $fetch['book_id'];?>" data-target="#updaterecord<?php echo $fetch['book_id'];?>" data-toggle="modal"></button>
+						<button onclick = "return confirm('Are you sure you want to delete this record?');" href = "delete.php?book_id=<?php echo $fetch['book_id']?>"></span></button>
+						</center>
+					</td>
+				</tr>
+				<?php
+				}
+				$conn->close();
+				?>
             </tbody>
         </table>
 	</form>
@@ -87,6 +105,6 @@ if(ISSET($_POST['editrecord'])){
 			alert("A new book has been successfully added!");
 		}
 	</script>
-<?php  $dbconn->close();?>
+<?php $conn->close(); ?>
 </body>
 </html>
