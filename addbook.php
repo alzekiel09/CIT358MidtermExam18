@@ -1,5 +1,7 @@
 <?php
-    
+$conn = new mysqli("localhost", "root", "", "library") or die(mysqli_error());
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);  
 ?>
 <html>
 
@@ -43,7 +45,6 @@
 			alert("A new book has been successfully added!");
 		}
 	</script>
-<?php 
-    $dbconn->close();
+<?php  $dbconn->close();?>
 </body>
 </html>
