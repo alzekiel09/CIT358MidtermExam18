@@ -18,8 +18,8 @@ if(ISSET($_POST['submit'])){
 	else {
 		$conn->query("INSERT INTO `books` VALUES('', '$book_title', '$book_pages', '$book_author', '$published_year')") or die(mysqli_error());
 		$conn->close();
-		echo "<script type='text/javascript'>alert('Successfully added new book!');</script>";
-		echo "<script>document.location='index.php'</script>";  
+		echo "<script type='text/javascript'>alert('Successfully Added New book!');</script>";
+		echo "<script>document.location='addbook.php'</script>";  
 	}
 }
 ?>
