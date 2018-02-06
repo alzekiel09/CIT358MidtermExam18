@@ -35,12 +35,12 @@ if(ISSET($_POST['submit'])){
 	<h1>Library Database</h1>
 	<fieldset>
 		<legend>Book Information</legend>
-		<label>Title:</label> <input type="text" name="title" required/><br />
-		<label>Pages:</label> <input type="number" min=1 name="pages" required/><br />
-		<label>Author:</label> <input type="text" name="author" required/><br />
-		<label>Published Year:</label> <input type="text" name="year" required/>
+		<label>Title:</label> <input type="text" name="book_title" required/><br />
+		<label>Pages:</label> <input type="number" min=1 name="book_pages" required/><br />
+		<label>Author:</label> <input type="text" name="book_author" required/><br />
+		<label>Published Year:</label> <input type="text" name="published_year" required/>
         <div><br/></div>
-    <input style="float:right" type="submit" value="Add Book" onClick="return submit_form();" name="submit"/>
+    <input style="float:right" type="submit" value="Add Book" name="submit"/>
     </fieldset>
     <h3>List of Stored Books</h3>
     <table border="2" align="center" cellpadding=5>
