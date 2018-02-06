@@ -31,7 +31,7 @@ if(ISSET($_POST['submit'])){
 </head>
 
 <body>
-	<form action="registration" method="post">
+	<form action="" method="post">
 	<h1>Library Database</h1>
 	<fieldset>
 		<legend>Book Information</legend>
@@ -54,35 +54,27 @@ if(ISSET($_POST['submit'])){
             </thead>
             <tbody>
                 <?php
-				$conn = new mysqli("localhost", "root", "", "library") or die(mysqli_error());
-				$query = $conn->query("SELECT * FROM `registration` ORDER BY `book_id` DESC") or die(mysqli_error());
-				while($fetch = $query->fetch_array()){
-				?>
-				<tr>
-					<td><center><?php echo $fetch['book_id']?></center></td>
-					<td><center><?php echo $fetch['title']?></center></td>
-					<td><center><?php echo $fetch['pages']?></center></td>
-					<td><center><?php echo $fetch['author']?></center></td>
-					<td><center><?php echo $fetch['year']?></center></td>
-					<td><center>
-						<button href="#update.php<?php echo $fetch['book_id'];?>" data-target="#updaterecord<?php echo $fetch['book_id'];?>" data-toggle="modal"></button>
-						<button onclick = "return confirm('Are you sure you want to delete this record?');" href = "delete.php?book_id=<?php echo $fetch['book_id']?>"></span></button>
-						</center>
-					</td>
-				</tr>
-				<?php
-				}
-				$conn->close();
-				?>
+					$conn = new mysqli("localhost", "root", "", "library") or die(mysqli_error());
+					$query = $conn->query("SELECT * FROM `library` ORDER BY `book_id` DESC") or die(mysqli_error());
+					while($fetch = $query->fetch_array()){
+					?>
+					<tr>
+						<td><center><?php echo $fetch['book_title']?></center></td>
+						<td><center><?php echo $fetch['book_pages']?></center></td>
+						<td><center><?php echo $fetch['book_author']?></center></td>
+						<td><center><?php echo $fetch['published_year']?></center></td>
+						<td><center>
+							<button>Delete</button>
+							</center>
+						</td>
+					</tr>
+					<?php
+					}
+					$conn->close();
+					?>
             </tbody>
         </table>
 	</form>
     <script type="text/javascript" src="assets/js/jquery-1.10.2.js"></script>
-	<script type="text/javascript">
-		function submit_form(){
-			alert("A new book has been successfully added!");
-		}
-	</script>
-<?php $conn->close(); ?>
 </body>
 </html>
