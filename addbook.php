@@ -1,48 +1,26 @@
 <?php
-//add record
 if(ISSET($_POST['submit'])){
-	$firstname = $_POST['title'];
-	$lastname = $_POST['pages'];
-	$gender = $_POST['author'];
-	$year = $_POST['year'];
-
-
+	$title = $_POST['book_title'];
+	$pages = $_POST['book_pages'];
+	$author = $_POST['book_author'];
+	$published_year = $_POST['published_year'];
 	$conn = new mysqli("localhost", "root", "", "library") or die(mysqli_error());
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-	$q1 = $conn->query ("SELECT * FROM `registration` WHERE `title` = '$title' ") or die(mysqli_error());
+	$q1 = $conn->query ("SELECT * FROM `books` WHERE `book_title` = '$book_title'") or die(mysqli_error());
 	$f1 = $q1->fetch_array();
 	$check = $q1->num_rows;
 	if($check > 0){
-		echo "<script> alert ('Title Book Already exist!')</script>";
+		echo "<script> alert ('Book Already Exist In The Database')</script>";
 		echo "<script>document.location='addbook.php'</script>";
 	}
 	else {
-		$conn->query("INSERT INTO `registration` VALUES('', '$title', '$pages', '$gender', '$age', '$year')") or die(mysqli_error());
+		$conn->query("INSERT INTO `books` VALUES('', '$book_title', '$book_pages', '$book_author', '$published_year')") or die(mysqli_error());
 		$conn->close();
-		echo "<script type='text/javascript'>alert('Successfully added new record!');</script>";
+		echo "<script type='text/javascript'>alert('Successfully added new book!');</script>";
 		echo "<script>document.location='index.php'</script>";  
 	}
-}
-// edit record
-if(ISSET($_POST['editrecord'])){
-	$book_id = $_POST['book_id'];
-	$title = $_POST['title'];    
-	$pages = $_POST['pages'];
-	$author = $_POST['author'];
-	$year = $_POST['year'];
-
-	$conn = new mysqli("localhost", "root", "", "library") or die(mysqli_error());
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-
-	$conn->query("UPDATE `registration` SET `title` = '$title', `pages` = '$pages', `author` = '$author', `year` = '$year'
-		 WHERE `book_id` = '$book_id'") or die(mysqli_error());
-	$conn->close();
-	echo "<script type='text/javascript'>alert('Successfully updated record!');</script>";
-	echo "<script>document.location='index.php'</script>";  
 }
 ?>
 <html>
